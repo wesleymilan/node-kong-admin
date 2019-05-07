@@ -7,7 +7,7 @@ The current version from May 2019 covers all methods listed on https://docs.kong
 #### Installing
 I had no time yet to write the tests and package it, so to install you should do using GitHub address.
 ```
-npm install git@github.com:wesleymilan/node-kong-admin.git --save
+npm install https://github.com/wesleymilan/node-kong-admin.git --save
 ```
 
 #### Using
