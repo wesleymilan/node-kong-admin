@@ -18,7 +18,7 @@ Target.prototype.create = function(data, cb) {
 
 Target.prototype.list = function(upstreamHostAndPortOrId, offset, cb) {
 
-    this.connector.execute('get', '/upstreams/' + upstreamHostAndPortOrId + '/targets', null, { offset: offset}, cb);
+    this.connector.execute('get', '/upstreams/' + upstreamHostAndPortOrId + '/targets', null, offset ? { offset: offset } : null, cb);
 
 };
 

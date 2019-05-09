@@ -60,25 +60,25 @@ Plugin.prototype.getSchema = function(pluginName, cb) {
 
 Plugin.prototype.list = function(offset, cb) {
 
-    this.connector.execute('get', '/plugins', null, { offset: offset }, cb);
+    this.connector.execute('get', '/plugins', null, offset ? { offset: offset } : null, cb);
 
 };
 
 Plugin.prototype.listByRoute = function(routeId, offset, cb) {
 
-    this.connector.execute('get', '/routes/' + routeId + '/plugins', null, { offset: offset }, cb);
+    this.connector.execute('get', '/routes/' + routeId + '/plugins', null, offset ? { offset: offset } : null, cb);
 
 };
 
 Plugin.prototype.listByService = function(serviceId, offset, cb) {
 
-    this.connector.execute('get', '/services/' + serviceId + '/plugins', null, { offset: offset }, cb);
+    this.connector.execute('get', '/services/' + serviceId + '/plugins', null, offset ? { offset: offset } : null, cb);
 
 };
 
 Plugin.prototype.listByConsumer = function(consumerId, offset, cb) {
 
-    this.connector.execute('get', '/consumers/' + consumerId + '/plugins', null, { offset: offset }, cb);
+    this.connector.execute('get', '/consumers/' + consumerId + '/plugins', null, offset ? { offset: offset } : null, cb);
 
 };
 
@@ -112,7 +112,7 @@ Plugin.prototype.validate = function(data) {
         "config": data.config,
         "run_on": data.run_on || "first",
         "protocols": data.protocols || ["http", "https"],
-        "enabled": data.enabled || true,
+        "enabled": data.enabled,
         "tags": data.tags
     };
 

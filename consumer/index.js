@@ -30,7 +30,7 @@ Consumer.prototype.getByPlugin = function(pluginId, cb) {
 
 Consumer.prototype.list = function(offset, cb) {
 
-    this.connector.execute('get', '/routes', null, { offset: offset }, cb);
+    this.connector.execute('get', '/routes', null, offset ? { offset: offset } : null, cb);
 
 };
 

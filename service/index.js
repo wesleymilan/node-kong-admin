@@ -36,7 +36,7 @@ Service.prototype.getByPlugin = function(pluginId, cb) {
 
 Service.prototype.list = function(offset, cb) {
 
-    this.connector.execute('get', '/services', null, { offset: offset }, cb);
+    this.connector.execute('get', '/services', null, offset ? { offset: offset } : null, cb);
 
 };
 

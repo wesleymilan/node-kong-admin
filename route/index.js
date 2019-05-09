@@ -36,13 +36,13 @@ Route.prototype.getByPlugin = function(pluginId, cb) {
 
 Route.prototype.list = function(offset, cb) {
 
-    this.connector.execute('get', '/routes', null, { offset: offset }, cb);
+    this.connector.execute('get', '/routes', null, offset ? { offset: offset } : null, cb);
 
 };
 
 Route.prototype.listByService = function(serviceNameOrId, offset, cb) {
 
-    this.connector.execute('get', '/services/' + serviceNameOrId + '/routes', null, { offset: offset }, cb);
+    this.connector.execute('get', '/services/' + serviceNameOrId + '/routes', null, offset ? { offset: offset } : null, cb);
 
 };
 
@@ -87,8 +87,8 @@ Route.prototype.validate = function(data) {
         "hosts": data.hosts,
         "paths": data.paths,
         "regex_priority": data.regex_priority || 0,
-        "strip_path": data.strip_path || true,
-        "preserve_host": data.preserve_host || false,
+        "strip_path": data.strip_path,
+        "preserve_host": data.preserve_host,
         "tags": data.tags,
         "snis": data.snis,
         "sources": data.sources,
