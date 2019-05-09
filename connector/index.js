@@ -7,12 +7,12 @@ const debug = require('debug')('node:kong:admin:connector');
 // Library definitions
 const TIMEOUT = 60000;
 
-function Connector(params) {
+function Connector(queryString) {
 
-    debug('Connector Constructor: ', params);
+    debug('Connector Constructor: ', queryString);
 
-    this.baseUrl = params.url;
-    this.authParams = params.auth || null;
+    this.baseUrl = queryString.url;
+    this.authParams = queryString.auth || null;
 
     this.requestHeaders = {
         'User-Agent': 'NODE-KONG-ADMIN-1.0.0 (pid: ' + process.pid + ', uid: ' + process.getuid() + ')',
@@ -63,9 +63,9 @@ Connector.prototype.auth = function (cb) {
         });
 };
 
-Connector.prototype.get = function (path, params, cb) {
+Connector.prototype.get = function (path, queryString, cb) {
 
-    debug('Connector GET: ', path, params);
+    debug('Connector GET: ', path, queryString);
 
     var self = this;
 
@@ -75,6 +75,7 @@ Connector.prototype.get = function (path, params, cb) {
         debug('Connector GET Sending Request');
 
         UNIREST.get(self.baseUrl + path)
+            .query(queryString || {})
             .headers(self.requestHeaders)
             .timeout(TIMEOUT)
             .end(function (response) {
@@ -95,9 +96,9 @@ Connector.prototype.get = function (path, params, cb) {
     });
 };
 
-Connector.prototype.post = function (path, data, params, cb) {
+Connector.prototype.post = function (path, data, queryString, cb) {
 
-    debug('Connector POST: ', path, data, params);
+    debug('Connector POST: ', path, data, queryString);
 
     var self = this;
 
@@ -107,6 +108,7 @@ Connector.prototype.post = function (path, data, params, cb) {
         debug('Connector POST Sending Request');
 
         UNIREST.post(self.baseUrl + path)
+            .query(queryString || {})
             .headers(self.requestHeaders)
             .send(data)
             .timeout(TIMEOUT)
@@ -126,9 +128,9 @@ Connector.prototype.post = function (path, data, params, cb) {
     });
 };
 
-Connector.prototype.postFile = function (path, filePath, params, cb) {
+Connector.prototype.postFile = function (path, filePath, queryString, cb) {
 
-    debug('Connector POSTFILE: ', path, filePath, params);
+    debug('Connector POSTFILE: ', path, filePath, queryString);
 
     var self = this;
 
@@ -138,6 +140,7 @@ Connector.prototype.postFile = function (path, filePath, params, cb) {
         debug('Connector POSTFILE Sending Request');
 
         UNIREST.post(self.baseUrl + path)
+            .query(queryString || {})
             .headers(self.requestHeaders)
             .attach('file', filePath, {
                 contentType: 'application/json'
@@ -159,9 +162,9 @@ Connector.prototype.postFile = function (path, filePath, params, cb) {
     });
 };
 
-Connector.prototype.put = function (path, data, params, cb) {
+Connector.prototype.put = function (path, data, queryString, cb) {
 
-    debug('Connector PUT: ', path, data, params);
+    debug('Connector PUT: ', path, data, queryString);
 
     var self = this;
 
@@ -171,6 +174,7 @@ Connector.prototype.put = function (path, data, params, cb) {
         debug('Connector PUT Sending Request');
 
         UNIREST.put(self.baseUrl + path)
+            .query(queryString || {})
             .headers(self.requestHeaders)
             .send(data)
             .timeout(TIMEOUT)
@@ -190,9 +194,9 @@ Connector.prototype.put = function (path, data, params, cb) {
     });
 };
 
-Connector.prototype.patch = function (path, data, params, cb) {
+Connector.prototype.patch = function (path, data, queryString, cb) {
 
-    debug('Connector PATCH: ', path, data, params);
+    debug('Connector PATCH: ', path, data, queryString);
 
     var self = this;
 
@@ -202,6 +206,7 @@ Connector.prototype.patch = function (path, data, params, cb) {
         debug('Connector PATCH Sending Request');
 
         UNIREST.patch(self.baseUrl + path)
+            .query(queryString || {})
             .headers(self.requestHeaders)
             .send(data)
             .timeout(TIMEOUT)
@@ -221,9 +226,9 @@ Connector.prototype.patch = function (path, data, params, cb) {
     });
 };
 
-Connector.prototype.delete = function (path, params, cb) {
+Connector.prototype.delete = function (path, queryString, cb) {
 
-    debug('Connector DELETE: ', path, params);
+    debug('Connector DELETE: ', path, queryString);
 
     var self = this;
 
@@ -233,6 +238,7 @@ Connector.prototype.delete = function (path, params, cb) {
         debug('Connector DELETE Sending Request');
 
         UNIREST.delete(self.baseUrl + path)
+            .query(queryString || {})
             .headers(self.requestHeaders)
             .timeout(TIMEOUT)
             .end(function (response) {
@@ -251,15 +257,15 @@ Connector.prototype.delete = function (path, params, cb) {
     });
 };
 
-Connector.prototype.execute = function(action, url, data, params, cb) {
+Connector.prototype.execute = function(action, url, data, queryString, cb) {
 
-    debug('Connector EXECUTE: ', action, url, data, params);
+    debug('Connector EXECUTE: ', action, url, data, queryString);
 
     if(data) {
 
         debug('Connector EXECUTE with DATA');
 
-        this[action](url, data, params, function (err, results) {
+        this[action](url, data, queryString, function (err, results) {
 
             if (err) {
                 debug('Connector EXECUTE Error: ', err);
@@ -275,7 +281,7 @@ Connector.prototype.execute = function(action, url, data, params, cb) {
 
         debug('Connector EXECUTE without DATA');
 
-        this[action](url, params, function (err, results) {
+        this[action](url, queryString, function (err, results) {
 
             if (err) {
                 debug('Connector EXECUTE Error: ', err);

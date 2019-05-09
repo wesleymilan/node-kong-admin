@@ -65,7 +65,7 @@ SNI.prototype.validate = function(data) {
     return {
         "name": data.name,
         "tags": data.tags,
-        "certificate": { "id": data.certificate }
+        "certificate": data.certificate
     };
 
 };

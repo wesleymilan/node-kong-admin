@@ -42,13 +42,13 @@ Route.prototype.list = function(offset, cb) {
 
 Route.prototype.listByService = function(serviceNameOrId, offset, cb) {
 
-    this.connector.execute('get', '/services/' + serviceNameOrId + '/route', null, { offset: offset }, cb);
+    this.connector.execute('get', '/services/' + serviceNameOrId + '/routes', null, { offset: offset }, cb);
 
 };
 
 Route.prototype.update = function(data, cb) {
 
-    this.connector.execute('patch', '/routes/' + (updateData.id || updateData.name), this.validate(data), null, cb);
+    this.connector.execute('patch', '/routes/' + (data.id || data.name), this.validate(data), null, cb);
 
 };
 
@@ -60,7 +60,7 @@ Route.prototype.updateByPlugin = function(pluginId, data, cb) {
 
 Route.prototype.updateOrCreate = function(data, cb) {
 
-    this.connector.execute('put', '/routes/' + (updateData.id || updateData.name), this.validate(data), null, cb);
+    this.connector.execute('put', '/routes/' + (data.id || data.name), this.validate(data), null, cb);
 
 };
 
@@ -93,7 +93,7 @@ Route.prototype.validate = function(data) {
         "snis": data.snis,
         "sources": data.sources,
         "destinations": data.destinations,
-        "service": { "id": data.service }
+        "service": data.service
     };
 
 };
