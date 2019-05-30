@@ -58,6 +58,24 @@ Consumer.prototype.updateOrCreateByPlugin = function(pluginId, data, cb) {
 
 };
 
+Consumer.prototype.createKeyAuthCredentials = function(consumerIdOrUsername, key, cb) {
+
+    this.connector.execute('post', '/consumers/' + consumerIdOrUsername + '/key-auth', { key: key }, null, cb);
+
+};
+
+Consumer.prototype.listKeyAuthCredentials = function(consumerIdOrUsername, cb) {
+
+    this.connector.execute('get', '/consumers/' + consumerIdOrUsername + '/key-auth', null, null, cb);
+
+};
+
+Consumer.prototype.deleteKeyAuthCredentials = function(consumerIdOrUsername, keyId, cb) {
+
+    this.connector.execute('delete', '/consumers/' + consumerIdOrUsername + '/key-auth/' + keyId, null, null, cb);
+
+};
+
 Consumer.prototype.delete = function(nameOrId, cb) {
 
     this.connector.execute('delete', '/consumers/' + nameOrId, null, null, cb);
