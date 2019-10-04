@@ -1,9 +1,27 @@
 {
   "name": "node-kong-admin",
-  "version": "1.0.1",
-  "description": "Node Kong Admin Client",
-  "main": "index.js",
+  "version": "1.0.2",
+  "description": "A Kong Admin API Client for NodeJS",
+  "homepage": "https://github.com/wesleymilan/node-kong-admin",
   "author": "Wesley Milan",
+  "engines": {
+    "node": ">=10"
+  },
+  "keywords": [
+    "NodeJS",
+    "array",
+    "combination",
+    "combinator",
+    "large arrays"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wesleymilan/node-kong-admin"
+  },
+  "bugs": {
+    "url": "https://github.com/wesleymilan/node-kong-admin/issues"
+  },
+  "main": "index.js",
   "license": "ISC",
   "dependencies": {
     "debug": "^3.1.0",
