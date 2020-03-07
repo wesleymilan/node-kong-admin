@@ -5,7 +5,6 @@ This library is on development stage, so be careful when using it on production 
 The current version from May 2019 covers all methods listed on https://docs.konghq.com/1.1.x/admin-api/.
 
 #### Installing
-I had no time yet to write the tests and package it, so to install you should do using GitHub address.
 ```
 npm install node-kong-admin --save
 ```
