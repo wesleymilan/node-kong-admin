@@ -110,7 +110,6 @@ Plugin.prototype.validate = function(data) {
         "service": data.service,
         "consumer": data.consumer,
         "config": data.config,
-        "run_on": data.run_on || "first",
         "protocols": data.protocols || ["http", "https"],
         "enabled": data.enabled,
         "tags": data.tags
