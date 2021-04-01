@@ -1,6 +1,6 @@
 {
   "name": "node-kong-admin",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A Kong Admin API Client for NodeJS",
   "homepage": "https://github.com/wesleymilan/node-kong-admin",
   "author": "Wesley Milan",
